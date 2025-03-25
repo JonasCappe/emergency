@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EMERGENCY ALERT</title>
+    <title>NOODALARM</title>
     <style>
         body {
             margin: 0;
@@ -47,20 +47,20 @@
 </head>
 <body>
     <div class="alert-container">
-        <div class="alert-title">EMERGENCY ALERT</div>
-        <div class="alert-message">ACTIVE THREAT IN BUILDING</div>
-        <div class="alert-message">LOCKDOWN PROCEDURES IN EFFECT</div>
+        <div class="alert-title">NOODALARM</div>
+        <div class="alert-message">ACTIEVE DREIGING IN GEBOUW</div>
+        <div class="alert-message">LOCKDOWN PROCEDURES VAN KRACHT</div>
         <div class="instructions">
-            <p>• LOCK your door</p>
-            <p>• TURN OFF lights</p>
-            <p>• SILENCE all devices</p>
-            <p>• MOVE away from doors and windows</p>
-            <p>• REMAIN QUIET and WAIT for instructions</p>
+            <p>• VERGRENDEL je deur</p>
+            <p>• DOE LICHTEN UIT</p>
+            <p>• ZET ALLE apparaten op STIL</p>
+            <p>• GA WEG van deuren en ramen</p>
+            <p>• BLIJF STIL en WACHT op instructies</p>
         </div>
     </div>
     
     <script>
-        // Set to full screen automatically (works on most modern browsers)
+        // Zet automatisch in volledig scherm (werkt op de meeste moderne browsers)
         document.documentElement.requestFullscreen = document.documentElement.requestFullscreen || 
                                                      document.documentElement.mozRequestFullScreen || 
                                                      document.documentElement.webkitRequestFullScreen || 
@@ -70,9 +70,9 @@
             document.documentElement.requestFullscreen();
         }
         
-        // Prevent closing with common keyboard shortcuts
+        // Voorkom sluiten met veelgebruikte sneltoetsen
         window.addEventListener('keydown', function(e) {
-            // Prevent Alt+F4, Ctrl+W, Esc
+            // Voorkom Alt+F4, Ctrl+W, Esc
             if ((e.key === 'F4' && e.altKey) || 
                 (e.key === 'w' && e.ctrlKey) || 
                 e.key === 'Escape') {
@@ -81,7 +81,7 @@
             }
         });
         
-        // Keep the window focused
+        // Houd het venster in focus
         window.onblur = function() {
             window.focus();
         };
