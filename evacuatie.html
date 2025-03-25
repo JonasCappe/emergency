@@ -3,73 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EVACUATIE ALARM</title>
+  <title>🚨 Evacuatie Alarm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --color-bg: #B00000;
+      --color-accent: #FFD600;
+      --color-text: #ffffff;
+      --font-main: 'Roboto', sans-serif;
+    }
+
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #ff5500, #ff3300);
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      height: 100vh;
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-bg);
+      font-family: var(--font-main);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      animation: pulse-bg 2s infinite;
     }
 
-    @keyframes pulse-bg {
-      0%, 100% { background-color: #ff3300; }
-      50% { background-color: #cc2200; }
-    }
-
-    .icon {
-      font-size: 6em;
-      margin-bottom: 20px;
-    }
-
-    .alert-title {
-      font-size: 3.5em;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px #000;
-    }
-
-    .alert-message {
-      font-size: 1.8em;
-      margin-bottom: 30px;
+    .container {
+      display: grid;
+      place-items: center;
+      height: 100%;
       text-align: center;
-      max-width: 1000px;
-      text-shadow: 1px 1px 2px #000;
+      padding: 2em;
+      animation: pulseBg 3s infinite;
     }
 
-    .instructions {
-      font-size: 1.4em;
+    @keyframes pulseBg {
+      0%, 100% { background-color: #B00000; }
+      50% { background-color: #8B0000; }
+    }
+
+    .banner {
+      font-size: 4em;
+      font-weight: 900;
+      color: var(--color-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.3em;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+    }
+
+    .subtitle {
+      font-size: 2em;
+      color: var(--color-text);
+      margin-bottom: 1.5em;
+      font-weight: 600;
+    }
+
+    .instruction-box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2em;
+      border: 2px solid var(--color-accent);
+      border-radius: 20px;
       max-width: 800px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px 30px;
-      border-radius: 12px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      width: 100%;
+      backdrop-filter: blur(5px);
     }
 
-    .instructions p {
-      margin: 12px 0;
-      padding-left: 1em;
+    .instruction-box ul {
+      list-style: none;
+      font-size: 1.5em;
+      color: var(--color-text);
+      text-align: left;
+    }
+
+    .instruction-box li {
+      margin: 1em 0;
+      padding-left: 2.2em;
       position: relative;
     }
 
-    .instructions p::before {
-      content: "⚠️";
+    .instruction-box li::before {
+      content: "";
       position: absolute;
       left: 0;
+      top: 8px;
+      width: 20px;
+      height: 20px;
+      background-color: var(--color-accent);
+      border-radius: 50%;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 2em;
+      width: 100%;
+      font-size: 1.2em;
+      color: var(--color-text);
+      opacity: 0.8;
+    }
+
+    .blink {
+      animation: blink 1.5s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
     audio {
@@ -78,27 +115,33 @@
   </style>
 </head>
 <body>
-  <div class="icon">🚨</div>
-  <div class="alert-title">EVACUATIE BEVEL</div>
-  <div class="alert-message">Verlaat onmiddellijk het gebouw via de dichtstbijzijnde nooduitgang.</div>
-  <div class="instructions">
-    <p>Blijf kalm en handel snel</p>
-    <p>Laat persoonlijke spullen liggen</p>
-    <p>Help mensen met beperkte mobiliteit</p>
-    <p>Gebruik geen liften</p>
-    <p>Verzamel op het aangewezen verzamelpunt</p>
-    <p>Wacht op verdere instructies</p>
+  <div class="container">
+    <div class="banner blink">EVACUATIE ALARM</div>
+    <div class="subtitle">Verlaat onmiddellijk het gebouw via de dichtstbijzijnde nooduitgang</div>
+    <div class="instruction-box">
+      <ul>
+        <li>Blijf kalm – geen paniek</li>
+        <li>Laat persoonlijke spullen liggen</li>
+        <li>Help personen met beperkte mobiliteit</li>
+        <li>Gebruik geen liften</li>
+        <li>Ga naar het verzamelpunt</li>
+        <li>Wacht op officiële instructies</li>
+      </ul>
+    </div>
   </div>
+  <div class="footer">🕒 Laatste update: <span id="timestamp"></span></div>
 
   <audio autoplay loop>
-    <source src="alarm.mp3" type="audio/mpeg" />
+    <source src="evacuation-alarm.mp3" type="audio/mpeg" />
   </audio>
 
   <script>
-    // Force fullscreen op start
     document.documentElement.requestFullscreen?.();
 
-    // Blokkeer veelgebruikte sluittoetsen
+    const timestamp = document.getElementById('timestamp');
+    const now = new Date();
+    timestamp.textContent = now.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+
     window.addEventListener('keydown', function(e) {
       if ((e.key === 'F4' && e.altKey) || 
           (e.key === 'w' && e.ctrlKey) || 
