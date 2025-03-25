@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EMERGENCY ALERT</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #c00000;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .alert-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .alert-title {
+            font-size: 3em;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .alert-message {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+            line-height: 1.5;
+            max-width: 800px;
+        }
+        .instructions {
+            text-align: left;
+            margin: 20px auto;
+            font-size: 1.5em;
+            color: white;
+        }
+        .alert-audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert-container">
+        <div class="alert-title">EMERGENCY ALERT</div>
+        <div class="alert-message">ACTIVE THREAT IN BUILDING</div>
+        <div class="alert-message">LOCKDOWN PROCEDURES IN EFFECT</div>
+        <div class="instructions">
+            <p>• LOCK your door</p>
+            <p>• TURN OFF lights</p>
+            <p>• SILENCE all devices</p>
+            <p>• MOVE away from doors and windows</p>
+            <p>• REMAIN QUIET and WAIT for instructions</p>
+        </div>
+    </div>
+    
+    <script>
+        // Set to full screen automatically (works on most modern browsers)
+        document.documentElement.requestFullscreen = document.documentElement.requestFullscreen || 
+                                                     document.documentElement.mozRequestFullScreen || 
+                                                     document.documentElement.webkitRequestFullScreen || 
+                                                     document.documentElement.msRequestFullscreen;
+        
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+        
+        // Prevent closing with common keyboard shortcuts
+        window.addEventListener('keydown', function(e) {
+            // Prevent Alt+F4, Ctrl+W, Esc
+            if ((e.key === 'F4' && e.altKey) || 
+                (e.key === 'w' && e.ctrlKey) || 
+                e.key === 'Escape') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Keep the window focused
+        window.onblur = function() {
+            window.focus();
+        };
+    </script>
+</body>
+</html>
